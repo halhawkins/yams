@@ -1,10 +1,13 @@
-import { Component } from "react";
+import { Component,createRef } from "react";
 
 class TileComponent extends Component{
     constructor(props){
         super(props);
         this.deck = this.props.deck;// [...tileimgs];
+        this.tilediv = createRef(null);
+        this.tileimg = createRef(null);
         this.state = {
+
             tileno: this.props.tileno,
             deck: this.props.deck,
             layer: 0,
@@ -18,6 +21,12 @@ class TileComponent extends Component{
             width: this.props.width,
             coveredCallback: null
         };
+    }
+
+    isblocked = () => {
+        if(this.props.itemBlocked(this.props.layer,this.props.row,this.props.item)){
+            this.tileimg.current.style.border = "black solid 1px";
+        }
     }
 
     selectable = () => {
@@ -37,7 +46,7 @@ class TileComponent extends Component{
             height: this.state.height,
             width: this.state.width
         }
-        return <div className="tile" style={tilestyle}><img className="tileImage" src={this.state.deck[this.state.tileno].image} style={imgstyle} alt={this.state.deck[this.state.tileno].tile} title={this.state.deck[this.state.tileno].tile}/></div>
+        return <div className="tile" style={tilestyle} onClick={this.isblocked} ref={this.tilediv}><img ref={this.tileimg} className="tileImage" src={this.state.deck[this.state.tileno].image} style={imgstyle} alt={this.state.deck[this.state.tileno].tile} title={this.state.deck[this.state.tileno].tile}/></div>
     }
 }
 
