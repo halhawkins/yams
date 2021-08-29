@@ -40,6 +40,7 @@ import MJw6 from  "./MJw6-.png"
 import MJw7 from  "./MJw7-.png"
 import MJw8 from  "./MJw8-.png"
 import MJw9 from  "./MJw9-.png"
+import mask from "./mask.png"
 
 const tileimgs = [
     {
@@ -193,447 +194,449 @@ const tileimgs = [
 
     {
         "image": MJs1,
-        "tile": "Bamboo"
+        "tile": "1 Bamboo"
     },
     {
         "image": MJs2,
-        "tile": "Bamboo"
+        "tile": "2 Bamboo"
     },
     {
         "image": MJs3,
-        "tile": "Bamboo"
+        "tile": "3 Bamboo"
     },
     {
         "image": MJs4,
-        "tile": "Bamboo"
+        "tile": "4 Bamboo"
     },
     {
         "image": MJs5,
-        "tile": "Bamboo"
+        "tile": "5 Bamboo"
     },
     {
         "image": MJs6,
-        "tile": "Bamboo"
+        "tile": "6 Bamboo"
     },
     {
         "image": MJs7,
-        "tile": "Bamboo"
+        "tile": "7 Bamboo"
     },
     {
         "image": MJs8,
-        "tile": "Bamboo"
+        "tile": "8 Bamboo"
     },
     {
         "image": MJs9,
-        "tile": "Bamboo"
+        "tile": "9 Bamboo"
     },
 
     {
         "image": MJs1,
-        "tile": "Bamboo"
+        "tile": "1 Bamboo"
     },
     {
         "image": MJs2,
-        "tile": "Bamboo"
+        "tile": "2 Bamboo"
     },
     {
         "image": MJs3,
-        "tile": "Bamboo"
+        "tile": "3 Bamboo"
     },
     {
         "image": MJs4,
-        "tile": "Bamboo"
+        "tile": "4 Bamboo"
     },
     {
         "image": MJs5,
-        "tile": "Bamboo"
+        "tile": "5 Bamboo"
     },
     {
         "image": MJs6,
-        "tile": "Bamboo"
+        "tile": "6 Bamboo"
     },
     {
         "image": MJs7,
-        "tile": "Bamboo"
+        "tile": "7 Bamboo"
     },
     {
         "image": MJs8,
-        "tile": "Bamboo"
+        "tile": "8 Bamboo"
     },
     {
         "image": MJs9,
-        "tile": "Bamboo"
+        "tile": "9 Bamboo"
     },
 
     {
         "image": MJs1,
-        "tile": "Bamboo"
+        "tile": "1 Bamboo"
     },
     {
         "image": MJs2,
-        "tile": "Bamboo"
+        "tile": "2 Bamboo"
     },
     {
         "image": MJs3,
-        "tile": "Bamboo"
+        "tile": "3 Bamboo"
     },
     {
         "image": MJs4,
-        "tile": "Bamboo"
+        "tile": "4 Bamboo"
     },
     {
         "image": MJs5,
-        "tile": "Bamboo"
+        "tile": "5 Bamboo"
     },
     {
         "image": MJs6,
-        "tile": "Bamboo"
+        "tile": "6 Bamboo"
     },
     {
         "image": MJs7,
-        "tile": "Bamboo"
+        "tile": "7 Bamboo"
     },
     {
         "image": MJs8,
-        "tile": "Bamboo"
+        "tile": "8 Bamboo"
     },
     {
         "image": MJs9,
-        "tile": "Bamboo"
+        "tile": "9 Bamboo"
     },
 
     {
         "image": MJs1,
-        "tile": "Bamboo"
+        "tile": "1 Bamboo"
     },
     {
         "image": MJs2,
-        "tile": "Bamboo"
+        "tile": "2 Bamboo"
     },
     {
         "image": MJs3,
-        "tile": "Bamboo"
+        "tile": "3 Bamboo"
     },
     {
         "image": MJs4,
-        "tile": "Bamboo"
+        "tile": "4 Bamboo"
     },
     {
         "image": MJs5,
-        "tile": "Bamboo"
+        "tile": "5 Bamboo"
     },
     {
         "image": MJs6,
-        "tile": "Bamboo"
+        "tile": "6 Bamboo"
     },
     {
         "image": MJs7,
-        "tile": "Bamboo"
+        "tile": "7 Bamboo"
     },
     {
         "image": MJs8,
-        "tile": "Bamboo"
+        "tile": "8 Bamboo"
     },
     {
         "image": MJs9,
-        "tile": "Bamboo"
+        "tile": "9 Bamboo"
     },
 
     {
         "image": MJt1,
-        "tile": "Dots"
+        "tile": "1 Dots"
     },
     {
         "image": MJt2,
-        "tile": "Dots"
+        "tile": "2 Dots"
     },
     {
         "image": MJt3,
-        "tile": "Dots"
+        "tile": "3 Dots"
     },
     {
         "image": MJt4,
-        "tile": "Dots"
+        "tile": "4 Dots"
     },
     {
         "image": MJt5,
-        "tile": "Dots"
+        "tile": "5 Dots"
     },
     {
         "image": MJt6,
-        "tile": "Dots"
+        "tile": "6 Dots"
     },
     {
         "image": MJt7,
-        "tile": "Dots"
+        "tile": "7 Dots"
     },
     {
         "image": MJt8,
-        "tile": "Dots"
+        "tile": "8 Dots"
     },
     {
         "image": MJt9,
-        "tile": "Dots"
+        "tile": "9 Dots"
     },
 
     {
         "image": MJt1,
-        "tile": "Dots"
+        "tile": "1 Dots"
     },
     {
         "image": MJt2,
-        "tile": "Dots"
+        "tile": "2 Dots"
     },
     {
         "image": MJt3,
-        "tile": "Dots"
+        "tile": "3 Dots"
     },
     {
         "image": MJt4,
-        "tile": "Dots"
+        "tile": "4 Dots"
     },
     {
         "image": MJt5,
-        "tile": "Dots"
+        "tile": "5 Dots"
     },
     {
         "image": MJt6,
-        "tile": "Dots"
+        "tile": "6 Dots"
     },
     {
         "image": MJt7,
-        "tile": "Dots"
+        "tile": "7 Dots"
     },
     {
         "image": MJt8,
-        "tile": "Dots"
+        "tile": "8 Dots"
     },
     {
         "image": MJt9,
-        "tile": "Dots"
+        "tile": "9 Dots"
     },
 
     {
         "image": MJt1,
-        "tile": "Dots"
+        "tile": "1 Dots"
     },
     {
         "image": MJt2,
-        "tile": "Dots"
+        "tile": "2 Dots"
     },
     {
         "image": MJt3,
-        "tile": "Dots"
+        "tile": "3 Dots"
     },
     {
         "image": MJt4,
-        "tile": "Dots"
+        "tile": "4 Dots"
     },
     {
         "image": MJt5,
-        "tile": "Dots"
+        "tile": "5 Dots"
     },
     {
         "image": MJt6,
-        "tile": "Dots"
+        "tile": "6 Dots"
     },
     {
         "image": MJt7,
-        "tile": "Dots"
+        "tile": "7 Dots"
     },
     {
         "image": MJt8,
-        "tile": "Dots"
+        "tile": "8 Dots"
     },
     {
         "image": MJt9,
-        "tile": "Dots"
+        "tile": "9 Dots"
     },
 
     {
         "image": MJt1,
-        "tile": "Dots"
+        "tile": "1 Dots"
     },
     {
         "image": MJt2,
-        "tile": "Dots"
+        "tile": "2 Dots"
     },
     {
         "image": MJt3,
-        "tile": "Dots"
+        "tile": "3 Dots"
     },
     {
         "image": MJt4,
-        "tile": "Dots"
+        "tile": "4 Dots"
     },
     {
         "image": MJt5,
-        "tile": "Dots"
+        "tile": "5 Dots"
     },
     {
         "image": MJt6,
-        "tile": "Dots"
+        "tile": "6 Dots"
     },
     {
         "image": MJt7,
-        "tile": "Dots"
+        "tile": "7 Dots"
     },
     {
         "image": MJt8,
-        "tile": "Dots"
+        "tile": "8 Dots"
     },
     {
         "image": MJt9,
-        "tile": "Dots"
+        "tile": "9 Dots"
     },
 
     {
         "image": MJw1,
-        "tile": "Characters"
+        "tile": "1 Characters"
     },
     {
         "image": MJw2,
-        "tile": "Characters"
+        "tile": "2 Characters"
     },
     {
         "image": MJw3,
-        "tile": "Characters"
+        "tile": "3 Characters"
     },
     {
         "image": MJw4,
-        "tile": "Characters"
+        "tile": "4 Characters"
     },
     {
         "image": MJw5,
-        "tile": "Characters"
+        "tile": "5 Characters"
     },
     {
         "image": MJw6,
-        "tile": "Characters"
+        "tile": "6 Characters"
     },
     {
         "image": MJw7,
-        "tile": "Characters"
+        "tile": "7 Characters"
     },
     {
         "image": MJw8,
-        "tile": "Characters"
+        "tile": "8 Characters"
     },
     {
         "image": MJw9,
-        "tile": "Characters"
+        "tile": "9 Characters"
     },
 
     {
         "image": MJw1,
-        "tile": "Characters"
+        "tile": "1 Characters"
     },
     {
         "image": MJw2,
-        "tile": "Characters"
+        "tile": "2 Characters"
     },
     {
         "image": MJw3,
-        "tile": "Characters"
+        "tile": "3 Characters"
     },
     {
         "image": MJw4,
-        "tile": "Characters"
+        "tile": "4 Characters"
     },
     {
         "image": MJw5,
-        "tile": "Characters"
+        "tile": "5 Characters"
     },
     {
         "image": MJw6,
-        "tile": "Characters"
+        "tile": "6 Characters"
     },
     {
         "image": MJw7,
-        "tile": "Characters"
+        "tile": "7 Characters"
     },
     {
         "image": MJw8,
-        "tile": "Characters"
+        "tile": "8 Characters"
     },
     {
         "image": MJw9,
-        "tile": "Characters"
+        "tile": "9 Characters"
     },
 
     {
         "image": MJw1,
-        "tile": "Characters"
+        "tile": "1 Characters"
     },
     {
         "image": MJw2,
-        "tile": "Characters"
+        "tile": "2 Characters"
     },
     {
         "image": MJw3,
-        "tile": "Characters"
+        "tile": "3 Characters"
     },
     {
         "image": MJw4,
-        "tile": "Characters"
+        "tile": "4 Characters"
     },
     {
         "image": MJw5,
-        "tile": "Characters"
+        "tile": "5 Characters"
     },
     {
         "image": MJw6,
-        "tile": "Characters"
+        "tile": "6 Characters"
     },
     {
         "image": MJw7,
-        "tile": "Characters"
+        "tile": "7 Characters"
     },
     {
         "image": MJw8,
-        "tile": "Characters"
+        "tile": "8 Characters"
     },
     {
         "image": MJw9,
-        "tile": "Characters"
+        "tile": "9 Characters"
     },
 
     {
         "image": MJw1,
-        "tile": "Characters"
+        "tile": "1 Characters"
     },
     {
         "image": MJw2,
-        "tile": "Characters"
+        "tile": "2 Characters"
     },
     {
         "image": MJw3,
-        "tile": "Characters"
+        "tile": "3 Characters"
     },
     {
         "image": MJw4,
-        "tile": "Characters"
+        "tile": "4 Characters"
     },
     {
         "image": MJw5,
-        "tile": "Characters"
+        "tile": "5 Characters"
     },
     {
         "image": MJw6,
-        "tile": "Characters"
+        "tile": "6 Characters"
     },
     {
         "image": MJw7,
-        "tile": "Characters"
+        "tile": "7 Characters"
     },
     {
         "image": MJw8,
-        "tile": "Characters"
+        "tile": "8 Characters"
     },
     {
         "image": MJw9,
-        "tile": "Characters"
+        "tile": "9 Characters"
     },
 ];
+const maskimg = mask;
 
 export default tileimgs;
+export {mask};

@@ -1,4 +1,5 @@
 import { Component,createRef } from "react";
+import {mask} from "./tiles/tiles";
 
 class TileComponent extends Component{
     constructor(props){
@@ -25,7 +26,12 @@ class TileComponent extends Component{
 
     isblocked = () => {
         if(this.props.itemBlocked(this.props.layer,this.props.row,this.props.item)){
-            this.tileimg.current.style.border = "black solid 1px";
+            
+            if(document.getElementById("tilemask"))
+                document.getElementById("tilemask").remove();
+            this.tilediv.current.innerHTML = this.tilediv.current.innerHTML + "<img id=\"tilemask\" src=\"" + mask + "\" class=\"tileImage\" style=\"left:0;top:0;height:" + this.state.height + "px; width:" + this.state.width + "px;\">";
+            // console.log(this.tilediv.current.innerHTML);
+            // this.tileimg.current.style.border = "black solid 1px";
         }
     }
 
