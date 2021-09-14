@@ -55,7 +55,6 @@ class LayoutComponent extends Component{
                     return response.json();
             }).then(
                 data => {
-                console.log("loadLayout: ",this.deck);
                    if(this._ismounted){
                         let tilenoLayout = JSON.parse(JSON.stringify(data.layouts[0]));
                         let tileLayout = JSON.parse(JSON.stringify(data.layouts[0]));
@@ -65,11 +64,6 @@ class LayoutComponent extends Component{
                                 for(let r = 0;r < data.layouts[0][l].length; r++){
                                     if(tilenoLayout[ls][l][r]!==null){
                                         for(let i=0;i<data.layouts[0][l][r].length; i++){
-                                            console.log("loadLayout: ",{
-                                                position: tileLayout[l][r][i],
-                                                tile: this.deck[c],
-                                                c: c
-                                            })
                                             if(tileLayout[l][r][i] !== null){
                                                 tileLayout[l][r][i] = {
                                                     position: tileLayout[l][r][i],
@@ -88,8 +82,6 @@ class LayoutComponent extends Component{
                                 }
                             }
                         }
-                        console.log("loadLayout: ",tileLayout);
-
                         this.setState({
                             layout: data.layouts,
                             tilenoLayout: tilenoLayout,
@@ -113,134 +105,145 @@ class LayoutComponent extends Component{
 
     removeTile = (l,r,i,c) => {
         let ii = this.state.tileLayout[l][r].indexOf(i);
-        console.log("\n\n\n\n\ni:",i);
-        // console.log("the card: ",this.state.deck[ii]);
-
-        // let deck = JSON.parse(JSON.stringify(this.deck));
-        // this.deck[ii] = null;
         
         let tmpLayout = JSON.parse(JSON.stringify(this.state.tileLayout));
         tmpLayout[l][r][i.index] = null;
-        console.log("removeTile: ", tmpLayout);
         this.setState({tileLayout: tmpLayout});
     }
 
     itemBlocked = (l,r,i,c) => {
-        // let message1,message2,message3;
-        // message1 = this.blockedByLayer(l,r,i)?"blocked by layer":"not blocked by layer";
-        // message2 = this.itemBlockedLeft(l,r,i)?"Blocked left":"not blocked left";
-        // message3 = this.itemBlockedRight(l,r,i)?"Blocked right":"not blocked right";
-        // let layoutCopy = [...this.state.layout];
         if(!this.blockedByLayer(l,r,i) && (!this.itemBlockedLeft(l,r,i) || !this.itemBlockedRight(l,r,i))){
-            // console.log("Pre - layoutCopy=",layoutCopy);
-
             let layoutCopy = this.removeTile(l,r,i,c);
-            // this.setState({deck: layoutCopy});
-            // console.log("Post - layoutCopy=",this.state.layout);
-            // this.forceUpdate();
             return true;
         }
         else{
-            // alert(message1+"\n"+message2+"\n"+message3);
             return false;
         }
     }
 
     itemBlockedRight = (l,r,i) => {
-        let ind = this.state.layout[0][l][r].indexOf(i);
-        let testedItem;
-        let above = r-1;
-        let below = r+1;
-        for(let item = 0; item < this.state.layout[0][l][r].length; item++){
-            testedItem = this.state.layout[0][l][r][item];
-            if(this.state.layout[0][l][r][item] === this.state.layout[0][l][r][ind]+2){
-                return true;
+        let toTheRight = i.position+2;
+        let blockedby = 0;
+        // blocked on this exact row
+        for(let idx = 0;idx < this.state.tileLayout[l][r].length; idx++){
+            if(this.state.tileLayout[l][r][idx] !== null){
+                if(this.state.tileLayout[l][r][idx].position === toTheRight){
+                    blockedby += 1;
+                }
             }
         }
-        if(above >= 0){
-            for(let item = 0; item < this.state.layout[0][l][above].length; item++){
-                testedItem = this.state.layout[0][l][above][item];
-                if(this.state.layout[0][l][above][item] === this.state.layout[0][l][r][ind]+2){
-                    return true;
+
+        // blocked by half a row above
+        if(r>0){
+            if(typeof(this.state.tileLayout[l][r-1]) !== 'undefined'){
+                if(this.state.tileLayout[l][r-1].length === 1 && this.state.tileLayout[l][r-1][0] !== null){ //row is there and not empty
+                    if(this.state.tileLayout[l][r-1][0].position === toTheRight){
+                        blockedby += 1;
+                    }
+                    else if(this.state.tileLayout[l][r-1].length === 1 && this.state.tileLayout[l][r-1][0] === null){
+                        blockedby += 0;
+                    }
+                    else if(this.state.tileLayout[l][r-1].length > 1){
+                        for(let idx = 0; idx < this.state.tileLayout[l][r-1].length; idx++){
+                            if(this.state.tileLayout[l][r-1][idx].position === toTheRight){
+                                blockedby += 1;
+                            }
+                        }
+                    }
+                    else if(this.state.tileLayout[l][r-1].length === 0){
+                        blockedby += 0;
+                    }
                 }
-            }    
+            }
         }
-        if(below <= this.state.layout[0][l].length-1){
-            for(let item = 0; item < this.state.layout[0][l][below].length; item++){
-                testedItem = this.state.layout[0][l][below][item];
-                if(this.state.layout[0][l][below][item] === this.state.layout[0][l][r][ind]+2){
-                    return true;
+
+        if(typeof(this.state.tileLayout[l][r+1]) !== 'undefined'){
+            if(this.state.tileLayout[l][r+1].length === 1 && this.state.tileLayout[l][r+1][0] !== null){ //row is there and not empty
+                if(this.state.tileLayout[l][r+1][0].position === toTheRight){
+                    blockedby += 1;
                 }
-            }    
+                else if(this.state.tileLayout[l][r+1].length === 1 && this.state.tileLayout[l][r+1][0] === null){
+                    blockedby += 0;
+                }
+                else if(this.state.tileLayout[l][r+1].length > 1){
+                    for(let idx = 0; idx < this.state.tileLayout[l][r+1].length; idx++){
+                        if(this.state.tileLayout[l][r+1][idx].position === toTheRight){
+                            blockedby += 1;
+                        }
+                    }
+                }
+                else if(this.state.tileLayout[l][r+1].length === 0){
+                    blockedby += 0;
+                }
+            }
         }
-        return false;
+
+        if(blockedby >0){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
    
     itemBlockedLeft = (l,r,i) => {
-        let ind = this.state.layout[0][l][r].indexOf(i);
-        let testedItem;
-        let above = r-1;
-        let below = r+1;
-        for(let item = 0; item < this.state.layout[0][l][r].length; item++){
-            testedItem = this.state.layout[0][l][r][item];
-            if(this.state.layout[0][l][r][item] === this.state.layout[0][l][r][ind]-2){
-                return true;
+        let toTheLeft = i.position-2;
+        let blockedby = 0;
+        // blocked on this exact row
+        for(let idx = 0;idx < this.state.tileLayout[l][r].length; idx++){
+            if(this.state.tileLayout[l][r][idx] !== null){
+                if(this.state.tileLayout[l][r][idx].position === toTheLeft){
+                    blockedby += 1;
+                }
             }
         }
-        if(above >= 0){
-            for(let item = 0; item < this.state.layout[0][l][above].length; item++){
-                testedItem = this.state.layout[0][l][above][item];
-                if(this.state.layout[0][l][above][item] === this.state.layout[0][l][r][ind]-2){
-                    return true;
-                }
-            }    
-        }
-        if(below <= this.state.layout[0][l].length-1){
-            for(let item = 0; item < this.state.layout[0][l][below].length; item++){
-                testedItem = this.state.layout[0][l][below][item];
-                if(this.state.layout[0][l][below][item] === this.state.layout[0][l][r][ind]-2){
-                    return true;
-                }
-            }    
-        }
-        return false;
-    }
 
-    blockedByLayer = (l,r,i) => {
-        let ind = this.state.layout[0][l][r].indexOf(i);
-        let blockby = 0;
-        
-
-        let testLayer = l + 1;
-        if(this.state.layout[0].length > testLayer) {// there exists a higher level
-            if(typeof(this.state.layout[0][testLayer][r]) !== 'undefined'){ // row directly above exists
-
-                if(
-                    this.state.layout[0][testLayer][r].indexOf(i) !== -1 || // tile directly above
-                    this.state.layout[0][testLayer][r].indexOf(i-1) !== -1 || // tile above offset by minus half a tile
-                    this.state.layout[0][testLayer][r].indexOf(i+1) !== -1){ // tile above offest by half a tile
-                        blockby = 1;
-                }
-            }
-            if(typeof(this.state.layout[0][testLayer][r-1]) !== 'undefined'){ // row directly above exists
-                if(
-                    this.state.layout[0][testLayer][r-1].indexOf(i) !== -1 || // tile directly above
-                    this.state.layout[0][testLayer][r-1].indexOf(i-1) !== -1 || // tile above offset by minus half a tile
-                    this.state.layout[0][testLayer][r-1].indexOf(i+1) !== -1){ // tile above offest by half a tile
-                        blockby = 2;
-                }
-            }
-            if(typeof(this.state.layout[0][testLayer][r+1]) !== 'undefined'){ // row directly above exists
-                if(
-                    this.state.layout[0][testLayer][r+1].indexOf(i) !== -1 || // tile directly above
-                    this.state.layout[0][testLayer][r+1].indexOf(i-1) !== -1 || // tile above offset by minus half a tile
-                    this.state.layout[0][testLayer][r+1].indexOf(i+1) !== -1){ // tile above offest by half a tile
-                        blockby = 3;
+        // blocked by half a row above
+        if(r>0){
+            if(typeof(this.state.tileLayout[l][r-1]) !== 'undefined'){
+                if(this.state.tileLayout[l][r-1].length === 1 && this.state.tileLayout[l][r-1][0] !== null){ //row is there and not empty
+                    if(this.state.tileLayout[l][r-1][0].position === toTheLeft){
+                        blockedby += 1;
+                    }
+                    else if(this.state.tileLayout[l][r-1].length === 1 && this.state.tileLayout[l][r-1][0] === null){
+                        blockedby += 0;
+                    }
+                    else if(this.state.tileLayout[l][r-1].length > 1){
+                        for(let idx = 0; idx < this.state.tileLayout[l][r-1].length; idx++){
+                            if(this.state.tileLayout[l][r-1][idx].position === toTheLeft){
+                                blockedby += 1;
+                            }
+                        }
+                    }
+                    else if(this.state.tileLayout[l][r-1].length === 0){
+                        blockedby += 0;
+                    }
                 }
             }
         }
-        if(blockby > 0){
-            // alert(blockby);
+
+        if(typeof(this.state.tileLayout[l][r+1]) !== 'undefined'){
+            if(this.state.tileLayout[l][r+1].length === 1 && this.state.tileLayout[l][r+1][0] !== null){ //row is there and not empty
+                if(this.state.tileLayout[l][r+1][0].position === toTheLeft){
+                    blockedby += 1;
+                }
+                else if(this.state.tileLayout[l][r+1].length === 1 && this.state.tileLayout[l][r+1][0] === null){
+                    blockedby += 0;
+                }
+                else if(this.state.tileLayout[l][r+1].length > 1){
+                    for(let idx = 0; idx < this.state.tileLayout[l][r+1].length; idx++){
+                        if(this.state.tileLayout[l][r+1][idx].position === toTheLeft){
+                            blockedby += 1;
+                        }
+                    }
+                }
+                else if(this.state.tileLayout[l][r+1].length === 0){
+                    blockedby += 0;
+                }
+            }
+        }
+
+        if(blockedby >0){
             return true;
         }
         else{
@@ -248,11 +251,70 @@ class LayoutComponent extends Component{
         }
     }
 
+    blockedByLayer = (l,r,i) => {
+        const testLayer = l+1;
+        if(this.state.tileLayout.length === testLayer){
+            return false;
+        }
+        const leftObscurred = i.position < 1? 0: i.position-1;
+        const centerObscurred = i.position;
+        const rightObscurred = i.position + 1;
+        let blockedby = 0;
+
+        if(typeof(this.state.tileLayout[testLayer][r]) !== 'undefined'){ // row directly above
+            for(let idx = 0; idx < this.state.tileLayout[testLayer][r].length; idx++){
+                if(this.state.tileLayout[testLayer][r][idx] !== null){
+                    if(this.state.tileLayout[testLayer][r][idx].position === leftObscurred){
+                        blockedby = 1;
+                    }
+                    if(this.state.tileLayout[testLayer][r][idx].position === centerObscurred){
+                        blockedby = 1;
+                    }
+                    if(this.state.tileLayout[testLayer][r][idx].position === rightObscurred){
+                        blockedby = 1;
+                    }
+                }
+            }
+        }
+        if(typeof(this.state.tileLayout[testLayer][r-1]) !== 'undefined'){ // row overlapping above
+            for(let idx = 0; idx < this.state.tileLayout[testLayer][r-1].length; idx++){
+                if(this.state.tileLayout[testLayer][r-1][idx] !== null){
+                    if(this.state.tileLayout[testLayer][r-1][idx].position === leftObscurred){
+                        blockedby = 1;
+                    }
+                    if(this.state.tileLayout[testLayer][r-1][idx].position === centerObscurred){
+                        blockedby = 1;
+                    }
+                    if(this.state.tileLayout[testLayer][r-1][idx].position === rightObscurred){
+                        blockedby = 1;
+                    }
+                }
+            }
+        }
+        if(typeof(this.state.tileLayout[testLayer][r+1]) !== 'undefined'){ // row overlapping below
+            for(let idx = 0; idx < this.state.tileLayout[testLayer][r+1].length; idx++){
+                if(this.state.tileLayout[testLayer][r+1][idx] !== null){
+                    if(this.state.tileLayout[testLayer][r+1][idx].position === leftObscurred){
+                        blockedby = 1;
+                    }
+                    if(this.state.tileLayout[testLayer][r+1][idx].position === centerObscurred){
+                        blockedby = 1;
+                    }
+                    if(this.state.tileLayout[testLayer][r+1][idx].position === rightObscurred){
+                        blockedby = 1;
+                    }
+                }
+            }
+        }
+        if(blockedby > 0)
+            return true;
+        else
+            return false;
+    }
+
     render(){
-        // console.log("render: ",this.state.layout);
         let c = 0;
         let deck = JSON.parse(JSON.stringify(this.state.deck));
-//        console.log("render: ",this.state.tilenoLayout);
         if(this.state.layout.length > 0){
             let lo = JSON.parse(JSON.stringify(this.state.layout[0]));
             let lo2 = JSON.parse(JSON.stringify(this.state.tileLayout));
@@ -262,29 +324,13 @@ class LayoutComponent extends Component{
                     return itemLayer.map((itemRow,r) => {
                         return itemRow.map((item,i) => {
                             if(item !== null){
-                                // console.log("render: ",item);
                                 if(item.tile.image !== null && item.position !== null){
-                                    // console.log("render: ",item);
                                     let ctmp = c;
-                                    // ctmp = this.state.tilenoLayout[l][r][i];
                                     c++;
-                                    // console.log("render: ",this.deck[ctmp]);
                                     let x = (item.position*20)+l*4;
                                     let y = (r*25)+(l*4);
                                     const height = 50;
                                     const width = 40;
-                                    // console.log("render: ", {
-                                    //     tileRef: this.tileRefs[ctmp],
-                                    //     deck: this.deck,
-                                    //     key: "tile"+ctmp,
-                                    //     x: x,
-                                    //     y: y,
-                                    //     height: height,
-                                    //     width: width,
-                                    //     l: l,
-                                    //     r: r,
-                                    //     i: i
-                                    // });
                                     return <TileComponent ref={(element) => this.tileRefs[ctmp] = element} itemBlocked={this.itemBlocked} deck={this.deck} key={"tile"+ctmp} tileno={ctmp} x={x} y={y} height={height} width={width} layer={l} row={r} item={item}></TileComponent>
                                 }
                             }
@@ -297,39 +343,6 @@ class LayoutComponent extends Component{
         else{
             return <div className="boardcontainer"></div>
         }
-
-        // let tileslayout = [];
-        // let x,y,c = 0;
-        // let lo = this.state.layout;
-        // let tilenumber;
-        // console.log(this.state.tilenoLayout);
-        // if(lo.length > 0){
-        //     for(let l = 0; l < lo[0].length;l++)
-        //         for(let r = 0; r < lo[0][l].length; r++){
-        //             for(let i = 0; i < lo[0][l][r].length; i++){
-        //                 if(lo[0][l][r][i] !== null){
-        //                     x = ((lo[0][l][r][i])*20)+(l*4);
-        //                     y = (r*25)+(l*4);
-        //                     tilenumber = this.state.tilenoLayout[l][r][i];
-        //                     const height = 50;
-        //                     const width = 40;
-        //                     // console.log("x:"+x+"\ny:"+y);
-        //                     tileslayout[c] = <TileComponent ref={(element) => this.tileRefs[c] = element} itemBlocked={this.itemBlocked} deck={this.deck} key={"tile"+c} tileno={c} x={x} y={y} height={height} width={width} layer={l} row={r} item={lo[0][l][r][i]}></TileComponent>
-        //                     c++;
-        //                 }
-        //             }
-        //         }
-        //     return (
-        //         <div className="boardcontainer">
-        //         {tileslayout.map((item,i) => {
-        //             console.log(item);
-        //             return item
-        //         })}
-        //     </div>);
-        // }
-        // else{
-        //     return <div className="boardcontainer"></div>
-        // }
     }
 }
 

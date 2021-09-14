@@ -42,11 +42,8 @@ class TileComponent extends Component{
                 this.setState({selected: true});
             }
             else{
-                // this.tilediv.current.innerHTML = this.tilediv.current.innerHTML + "<img id=\"tilemask\" src=\"" + mask + "\" class=\"tileImage\" style=\"left:0;top:0;height:" + this.state.height + "px; width:" + this.state.width + "px;\">";
                 this.setState({selected: false});
             }
-            // console.log(this.tilediv.current.innerHTML);
-            // this.tileimg.current.style.border = "black solid 1px";
         }
     }
 
@@ -55,7 +52,6 @@ class TileComponent extends Component{
     }
 
     render = () => {
-        // console.log("tileno:"+this.state.tileno+"\nx:"+this.state.x+"\ny:"+this.state.y);
         let tilestyle = {
             left: this.props.x+"px",
             top: this.props.y+"px",
@@ -63,12 +59,9 @@ class TileComponent extends Component{
             width: this.state.width
         }
         let imgstyle = {
-            // left: this.state.x+"px",
-            // top: this.state.y+"px",
             height: this.state.height,
             width: this.state.width
         }
-        console.log("tile:" ,this.props);
         return <div className="tile" style={tilestyle} onClick={this.isblocked} ref={this.tilediv}><img ref={this.tileimg} className="tileImage" src={this.props.item.tile.image} style={imgstyle} alt={this.props.item.tile.tile} title={this.props.item.tile.tile}/></div>
     }
 }
